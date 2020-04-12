@@ -25,27 +25,26 @@ export class TodoService {
 
 
   getTodos():Observable<Todo[]>{
-    console.log("Url final: " + `${this.todosUrl}${this.todosLimit}`);
+    console.log("Petición GET a: " + `${this.todosUrl}${this.todosLimit}`);
     return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
-    //return this.http.get<Todo[]>(this.todosUrl+this.todosLimit);
   }
 
   //Delete Todo
   deleteTodo(todo:Todo):Observable<Todo>{
     const url =`${this.todosUrl}/${todo.id}`;
-    console.log("Peticion DELETE a dirección: "+url)
+    console.log("Peticion DELETE a dirección: "+url+" para borrar --> "+ todo.id+"///"+todo.title+"///"+todo.completed);
     return this.http.delete<Todo>(url,httpOptions);
   }
 
   //Toggle completed
   toggleCompleted(todo: Todo):Observable<any>{
     const url =`${this.todosUrl}/${todo.id}`;
-    console.log("Peticion PUT a dirección: "+url)
+    console.log("Peticion PUT a dirección: "+url +" para actualizar --> "+ todo.id+"///"+todo.title+"///"+todo.completed)
     return this.http.put(url,todo,httpOptions);
   }
 
   addTodo(todo:Todo):Observable<Todo>{
-    console.log("Peticion POST a dirección: "+this.todosUrl);
+    console.log("Peticion POST a dirección: "+this.todosUrl+" para insertar --> "+ todo.id+"///"+todo.title+"///"+todo.completed);
     return this.http.post<Todo>(this.todosUrl,todo,httpOptions);
   }
 }
